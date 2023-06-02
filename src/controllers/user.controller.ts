@@ -3,12 +3,21 @@ import listUserService from "../services/user/listUser.service";
 import { createUserService } from "../services/user/createUser.service";
 import updateUserService from "../services/user/updateUser.service";
 import deleteUserService from "../services/user/deleteUser.service";
+import findUserService from "../services/user/getUserById.service";
 
 // Controller para listar todos os Users
 async function listUserController(req: Request, res: Response) {
   const user = await listUserService();
 
   return res.status(200).json(user);
+}
+
+//Controller para buscar usuário por id
+async function findUserController(req: Request, res: Response) {
+    const userId = req.params.id;
+    const user = await findUserService(userId);
+
+    return res.status(200).json(user);
 }
 
 // Controller para criar um novo Users
@@ -37,6 +46,7 @@ async function deleteUserController(req: Request, res: Response) {
 
 export {
   listUserController,
+  findUserController,
   createUserController,
   updateUserController,
   deleteUserController,
