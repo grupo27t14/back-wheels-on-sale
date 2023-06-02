@@ -3,11 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
+  OneToMany,
 } from "typeorm";
 import { PersonalInformation } from "./personalInformation.entitie";
 import { AddressInformation } from "./addressInformation.entitie";
+import { Car } from "./car.entitie";
 
-@Entity("user")
+@Entity("users")
 export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -32,4 +34,8 @@ export class User {
 
   @OneToOne(() => AddressInformation,  (addressInformation) => addressInformation.user)
   addressInformation: AddressInformation;
+
+  @OneToMany(() => Car, (car) => car.user)
+  cars: Car[];
+
 }
