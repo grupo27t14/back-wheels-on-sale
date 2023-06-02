@@ -11,14 +11,14 @@ import {
   ensureDataIsValidMiddleware,
   ensureIsOwnerMiddlewareUser,
 } from "../middlewares";
-import { userSchemaRequest, userSchemaUpdate } from "../schemas/user.schema";
+import { userSchemaReq, userSchemaUpdate } from "../schemas/user.schema";
 import { ensureUuidIsValidMiddlewareUser } from "../middlewares/ensureUuidIsValid.middleware";
 
 const userRoutes = Router();
 
 userRoutes.post(
   "",
-  ensureDataIsValidMiddleware(userSchemaRequest),
+  ensureDataIsValidMiddleware(userSchemaReq),
   createUserController
 );
 
