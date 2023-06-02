@@ -5,7 +5,7 @@
 yarn.lock
 
 # Arquivo de configuração específico para Typescript
-/tsconfig.json
+# /tsconfig.json
 
 # Arquivo de ambiente específico para Node.js
 .env

@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+} from "typeorm";
+import { PersonalInformation } from "./personalInformation.entitie";
+import { AddressInformation } from "./addressInformation.entitie";
 
 @Entity("user")
 export class User {
@@ -13,4 +20,16 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ default: false })
+  is_admin: boolean;
+
+  @Column({ default: false })
+  is_seller: boolean;
+
+  @OneToOne(() => PersonalInformation,  (personalInformation) => personalInformation.user)
+  personalInformation: PersonalInformation;
+
+  @OneToOne(() => AddressInformation,  (addressInformation) => addressInformation.user)
+  addressInformation: AddressInformation;
 }
