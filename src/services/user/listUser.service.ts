@@ -11,7 +11,7 @@ const listUserService = async (): Promise<TUsersRes> => {
     relations: ["personalInformation", "addressInformation"],
   });
 
-  const user = usersSchemaRes.parse(findUsers); // nao funcionou 1
+  const user = usersSchemaRes.parse(findUsers);
 
   return user;
 };
