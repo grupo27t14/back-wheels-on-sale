@@ -27,7 +27,7 @@ userRoutes.get("", listUserController);
 
 userRoutes.get("/:id", ensureUuidIsValidMiddlewareUser, findUserController);
 
-userRoutes.get("/:id/cars", listUserCarsController)
+userRoutes.get("/:id/cars", listUserCarsController);
 
 userRoutes.patch(
   "/:id",

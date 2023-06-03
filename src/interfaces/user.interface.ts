@@ -11,5 +11,4 @@ type TUserRes = z.infer<typeof userSchemaRes>;
 type TUsersRes = z.infer<typeof usersSchemaRes>;
 type TUserUpdate = DeepPartial<TUserReq>;
 
-
-export {TUserReq, TUserRes, TUserUpdate, TUsersRes}
+export { TUserReq, TUserRes, TUserUpdate, TUsersRes };

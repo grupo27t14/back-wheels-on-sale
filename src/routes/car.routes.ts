@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { ensureAuthMiddleware, ensureDataIsValidMiddleware } from "../middlewares";
+import {
+  ensureAuthMiddleware,
+  ensureDataIsValidMiddleware,
+} from "../middlewares";
 import {
   createCarController,
   deleteCarController,
-  listCarController,
+  findCarController,
+  listCarsController,
   updateCarController,
 } from "../controllers/car.controller";
 import { carSchemaRequest, carSchemaUpdate } from "../schemas/car.schema";
@@ -12,12 +16,28 @@ import { ensureUuidIsValidMiddlewareUser } from "../middlewares/ensureUuidIsVali
 
 const carRoutes = Router();
 
-carRoutes.get("", listCarController); //deve ser feita a lista pelo ID e não pelo token
+carRoutes.get("", listCarsController);
+carRoutes.get("/:id", ensureUuidIsValidMiddlewareUser, findCarController);
 
 carRoutes.use(ensureAuthMiddleware);
 
-carRoutes.post("", ensureDataIsValidMiddleware(carSchemaRequest),createCarController);
-carRoutes.patch("/:id", ensureUuidIsValidMiddlewareUser, ensureIsOwnerMiddlewareCar, ensureDataIsValidMiddleware(carSchemaUpdate), updateCarController);
-carRoutes.delete("/:id", ensureUuidIsValidMiddlewareUser, ensureIsOwnerMiddlewareCar, deleteCarController);
+carRoutes.post(
+  "",
+  ensureDataIsValidMiddleware(carSchemaRequest),
+  createCarController
+);
+carRoutes.patch(
+  "/:id",
+  ensureUuidIsValidMiddlewareUser,
+  ensureIsOwnerMiddlewareCar,
+  ensureDataIsValidMiddleware(carSchemaUpdate),
+  updateCarController
+);
+carRoutes.delete(
+  "/:id",
+  ensureUuidIsValidMiddlewareUser,
+  ensureIsOwnerMiddlewareCar,
+  deleteCarController
+);
 
 export { carRoutes };

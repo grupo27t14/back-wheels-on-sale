@@ -3,6 +3,7 @@ import { createCarService } from "../services/car/createCar.service";
 import { deleteCarService } from "../services/car/deleteCar.service";
 import { updateCarService } from "../services/car/updateCar.service";
 import { listCarsService } from "../services/car/listCar.service";
+import findCarService from "../services/car/getCarById.service";
 
 const createCarController = async (req: Request, res: Response) => {
   const userId = res.locals.userId;
@@ -12,8 +13,15 @@ const createCarController = async (req: Request, res: Response) => {
   return res.status(201).json(newCar);
 };
 
-const listCarController = async (req: Request, res: Response) => {
+const listCarsController = async (req: Request, res: Response) => {
   const car = await listCarsService();
+
+  return res.json(car);
+};
+
+const findCarController = async (req: Request, res: Response) => {
+  const carId = req.params.id;
+  const car = await findCarService(carId);
 
   return res.json(car);
 };
@@ -35,7 +43,8 @@ const deleteCarController = async (req: Request, res: Response) => {
 
 export {
   createCarController,
-  listCarController,
+  listCarsController,
   updateCarController,
   deleteCarController,
+  findCarController,
 };

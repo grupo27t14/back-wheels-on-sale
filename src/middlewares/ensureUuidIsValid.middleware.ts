@@ -1,25 +1,20 @@
 import { Request, Response, NextFunction } from "express";
 import { isValidUUID } from "../utils/uuidUtils";
-import { AppDataSource } from "../data-source";
-import { User } from "../entities/user.entitie";
 
 const ensureUuidIsValidMiddlewareUser = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => { 
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const userId: string = req.params.id;
 
-    const usersRepository = AppDataSource.getRepository(User);
+  if (!isValidUUID(userId)) {
+    return res.status(400).json({
+      message: "Invalid UUID",
+    });
+  }
 
-    const userId: string = req.params.id;
-
-    if (!isValidUUID(userId)) {
-        return res.status(400).json({
-          message: "Invalid user ID",
-        });
-    }
-    
-    return next()
-}
+  return next();
+};
 
 export { ensureUuidIsValidMiddlewareUser };
