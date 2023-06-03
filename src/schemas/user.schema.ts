@@ -21,6 +21,7 @@ const userSchema = z.object({
 
 const userSchemaRes = userSchema
   .extend({
+    created_at: z.date(),
     personalInformation: personalInformationSchemaRes,
     addressInformation: addressInformationSchemaRes,
   })

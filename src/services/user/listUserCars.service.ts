@@ -9,12 +9,12 @@ import { carsSchemaResponse } from "../../schemas/car.schema";
 import { TCarResponse } from "../../interfaces/car.interface";
 
 const listUserCarsService = async (userId: string): Promise<TCarResponse[]> => {
-    const userRepository: Repository<User> = AppDataSource.getRepository(User);
-    const carsRepository: Repository<Car> = AppDataSource.getRepository(Car)
+  const userRepository: Repository<User> = AppDataSource.getRepository(User);
+  const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
-    const user = await userRepository.findOneBy({
-        id: userId,
-      }) as TUserRes;
+  const user = (await userRepository.findOneBy({
+    id: userId,
+  })) as TUserRes;
 
   if (!user) {
     throw new AppError("User not found", 404);
@@ -23,9 +23,10 @@ const listUserCarsService = async (userId: string): Promise<TCarResponse[]> => {
   const cars: Car[] = await carsRepository.find({
     where: {
       user: user,
-    }, relations: {
-      user: true
-    }
+    },
+    relations: {
+      user: true,
+    },
   });
 
   return carsSchemaResponse.parse(cars);

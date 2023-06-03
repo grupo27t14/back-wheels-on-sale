@@ -13,6 +13,10 @@ const addressInformationSchemaRes = addressInformationSchemaReq.extend({
   id: z.string(),
 });
 
-const addressInformationSchemaUpdate = addressInformationSchemaReq.partial()
+const addressInformationSchemaUpdate = addressInformationSchemaReq.partial();
 
-export { addressInformationSchemaReq, addressInformationSchemaRes, addressInformationSchemaUpdate };
+export {
+  addressInformationSchemaReq,
+  addressInformationSchemaRes,
+  addressInformationSchemaUpdate,
+};

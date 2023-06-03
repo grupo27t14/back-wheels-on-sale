@@ -12,20 +12,29 @@ const carSchema = z.object({
   price: z.string(),
   is_promo: z.boolean(),
   description: z.string(),
+});
+
+const carSchemaRes = carSchema.extend({
+  created_at: z.date(),
   user: z.object({
     id: z.string(),
-    name: z.string()
-  })
+    name: z.string(),
+  }),
 });
 
 const carSchemaRequest = carSchema.omit({
   id: true,
   is_promo: true,
-  user: true
 });
 
 const carSchemaUpdate = carSchemaRequest.partial();
 
-const carsSchemaResponse = z.array(carSchema);
+const carsSchemaResponse = z.array(carSchemaRes);
 
-export { carSchema, carSchemaRequest, carSchemaUpdate, carsSchemaResponse };
+export {
+  carSchema,
+  carSchemaRequest,
+  carSchemaUpdate,
+  carsSchemaResponse,
+  carSchemaRes,
+};

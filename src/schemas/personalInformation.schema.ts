@@ -11,6 +11,10 @@ const personalInformationSchemaRes = personalInformationSchemaReq.extend({
   id: z.string(),
 });
 
-const personalInformationSchemaUpdate = personalInformationSchemaReq.partial()
+const personalInformationSchemaUpdate = personalInformationSchemaReq.partial();
 
-export { personalInformationSchemaReq, personalInformationSchemaRes, personalInformationSchemaUpdate };
+export {
+  personalInformationSchemaReq,
+  personalInformationSchemaRes,
+  personalInformationSchemaUpdate,
+};

@@ -6,6 +6,7 @@ import {
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
+  CreateDateColumn,
 } from "typeorm";
 import { PersonalInformation } from "./personalInformation.entitie";
 import { AddressInformation } from "./addressInformation.entitie";
@@ -31,6 +32,9 @@ export class User {
 
   @Column({ default: false })
   is_seller: boolean;
+
+  @CreateDateColumn({ type: "timestamp" })
+  created_at: Date;
 
   @OneToOne(
     () => PersonalInformation,

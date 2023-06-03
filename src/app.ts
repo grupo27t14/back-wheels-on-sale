@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/user", userRoutes);
 app.use("/login", loginRoutes);
-app.use("/car", carRoutes)
+app.use("/car", carRoutes);
 
 app.use(handleErrorMiddleware);
 

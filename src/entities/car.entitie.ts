@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, BeforeInsert } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  BeforeInsert,
+  CreateDateColumn,
+} from "typeorm";
 import { User } from "./user.entitie";
 import { Images } from "./images.entitie";
 
@@ -34,11 +42,11 @@ export class Car {
   @Column()
   description: string;
 
-  @Column()
-  published: Date;
+  @CreateDateColumn({ type: "timestamp" })
+  created_at: Date;
 
   @Column()
-  is_promo: Boolean
+  is_promo: Boolean;
 
   @ManyToOne(() => User, (user) => user.cars, { onDelete: "CASCADE" })
   user: User;
@@ -48,10 +56,9 @@ export class Car {
 
   @BeforeInsert()
   setIsPromo() {
-    const fipe = Number(this.fipe)
-    const price = Number(this.price)
-    
-    this.is_promo = price < fipe - (fipe * 5/100) ? true : false 
-  }
+    const fipe = Number(this.fipe);
+    const price = Number(this.price);
 
+    this.is_promo = price < fipe - (fipe * 5) / 100 ? true : false;
+  }
 }
