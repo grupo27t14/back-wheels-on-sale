@@ -29,13 +29,20 @@ export class User {
   @Column({ default: false })
   is_seller: boolean;
 
-  @OneToOne(() => PersonalInformation,  (personalInformation) => personalInformation.user)
+  @OneToOne(
+    () => PersonalInformation,
+    (personalInformation) => personalInformation.user,
+    { cascade: true }
+  )
   personalInformation: PersonalInformation;
 
-  @OneToOne(() => AddressInformation,  (addressInformation) => addressInformation.user)
+  @OneToOne(
+    () => AddressInformation,
+    (addressInformation) => addressInformation.user,
+    { cascade: true }
+  )
   addressInformation: AddressInformation;
 
   @OneToMany(() => Car, (car) => car.user)
   cars: Car[];
-
 }

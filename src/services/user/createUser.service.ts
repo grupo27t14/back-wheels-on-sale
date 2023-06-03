@@ -4,26 +4,17 @@ import { hash } from "bcryptjs";
 import { User } from "../../entities/user.entitie";
 import { PersonalInformation } from "../../entities/personalInformation.entitie";
 import { AddressInformation } from "../../entities/addressInformation.entitie";
-import { userSchemaResponse } from "../../schemas/user.schema";
-import { TUserRequest, TUserResponse } from "../../interfaces/user.interface";
+import { userSchemaRes } from "../../schemas/user.schema";
+import { TUserReq, TUserRes } from "../../interfaces/user.interface";
 
-const createUserService = async (
-  data: TUserRequest
-): Promise<TUserResponse> => {
-  const {
-    email,
-    name,
-    password,
-    is_admin,
-    is_seller,
-    personalInformationData,
-    addressInformationData,
-  } = data;
+const createUserService = async (data: TUserReq): Promise<TUserRes> => {
   const userRepository = AppDataSource.getRepository(User);
   const personalInformationRepository =
     AppDataSource.getRepository(PersonalInformation);
   const addressInformationRepository =
     AppDataSource.getRepository(AddressInformation);
+
+  const { email } = data;
 
   const findUser = await userRepository.findOne({
     where: {
@@ -36,37 +27,21 @@ const createUserService = async (
     throw new AppError("User already exists", 409);
   }
 
-  const hashedPassword = await hash(password, 10);
+  const hashedPassword = await hash(data.password, 10);
 
-  const user = userRepository.create({
-    name,
-    email,
+  const pinfo = personalInformationRepository.create(data.personalInformation);
+
+  const paddress = addressInformationRepository.create(data.addressInformation);
+
+  const create = {
+    ...data,
     password: hashedPassword,
-    is_admin,
-    is_seller,
-  });
+    addressInformation: paddress,
+    personalInformation: pinfo,
+  };
 
-  let personalInformation;
-  if (personalInformationData) {
-    personalInformation = personalInformationRepository.create(
-      personalInformationData
-    );
-    user.personalInformation = personalInformation;
-    await personalInformationRepository.save(personalInformation);
-  }
-
-  let addressInformation;
-  if (addressInformationData) {
-    addressInformation = addressInformationRepository.create(
-      addressInformationData
-    );
-    user.addressInformation = addressInformation;
-    await addressInformationRepository.save(addressInformation);
-  }
-
-  await userRepository.save(user);
-
-  return userSchemaResponse.parse(user);
+  await userRepository.save(create);
+  return userSchemaRes.parse(create);
 };
 
 export { createUserService };

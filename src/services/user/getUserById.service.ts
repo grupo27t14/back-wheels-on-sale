@@ -1,11 +1,11 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user.entitie";
-import { TUserResponse } from "../../interfaces/user.interface";
-import { userSchemaResponse } from "../../schemas/user.schema";
+import { TUserRes } from "../../interfaces/user.interface";
+import { userSchemaRes } from "../../schemas/user.schema";
 import AppError from "../../errors/AppErrors";
 
-const findUserService = async (id: string): Promise<TUserResponse> => {
+const findUserService = async (id: string): Promise<TUserRes> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const foundUser: User | null = await userRepository.findOne({
@@ -19,7 +19,7 @@ const findUserService = async (id: string): Promise<TUserResponse> => {
     throw new AppError("User not found", 404);
   }
 
-  const user = userSchemaResponse.parse(foundUser);
+  const user = userSchemaRes.parse(foundUser);
 
   return user;
 };
