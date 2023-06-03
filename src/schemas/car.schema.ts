@@ -10,11 +10,14 @@ const carSchema = z.object({
   color: z.string(),
   fipe: z.string(),
   price: z.string(),
+  is_promo: z.boolean(),
   description: z.string(),
+  userId: z.string()
 });
 
 const carSchemaRequest = carSchema.omit({
   id: true,
+  userId: true
 });
 
 const carSchemaUpdate = carSchemaRequest.partial();
