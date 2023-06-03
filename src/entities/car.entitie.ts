@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, BeforeInsert } from "typeorm";
 import { User } from "./user.entitie";
 import { Images } from "./images.entitie";
 
@@ -45,5 +45,13 @@ export class Car {
 
   @OneToMany(() => Images, (image) => image.car)
   images: Images[];
+
+  @BeforeInsert()
+  setIsPromo() {
+    const fipe = Number(this.fipe)
+    const price = Number(this.price)
+    
+    this.is_promo = price < fipe - (fipe * 5/100) ? true : false 
+  }
 
 }

@@ -12,11 +12,12 @@ const carSchema = z.object({
   price: z.string(),
   is_promo: z.boolean(),
   description: z.string(),
-  userId: z.string()
+  // userId: z.string()
 });
 
 const carSchemaRequest = carSchema.omit({
   id: true,
+  is_promo: true,
   userId: true
 });
 
