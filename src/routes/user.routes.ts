@@ -3,6 +3,7 @@ import {
   createUserController,
   deleteUserController,
   findUserController,
+  listUserCarsController,
   listUserController,
   updateUserController,
 } from "../controllers/user.controller";
@@ -25,6 +26,8 @@ userRoutes.post(
 userRoutes.get("", listUserController);
 
 userRoutes.get("/:id", ensureUuidIsValidMiddlewareUser, findUserController);
+
+userRoutes.get("/:id/cars", listUserCarsController)
 
 userRoutes.patch(
   "/:id",

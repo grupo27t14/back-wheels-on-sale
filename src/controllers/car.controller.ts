@@ -13,8 +13,7 @@ const createCarController = async (req: Request, res: Response) => {
 };
 
 const listCarController = async (req: Request, res: Response) => {
-  const userId = res.locals.userId;
-  const car = await listCarsService(userId);
+  const car = await listCarsService();
 
   return res.json(car);
 };
