@@ -13,10 +13,36 @@ const createCarController = async (req: Request, res: Response) => {
   return res.status(201).json(newCar);
 };
 
-const listCarsController = async (req: Request, res: Response) => {
-  const car = await listCarsService();
+// const listCarsController = async (req: Request, res: Response) => {
+//   const car = await listCarsService();
 
-  return res.json(car);
+//   return res.json(car);
+// };
+
+const listCarsController = async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 5; // Valor padrão de limite é 10, mas pode ser alterado conforme necessário
+
+  const { cars, totalCount } = await listCarsService(page, limit);
+
+  const totalPages = Math.ceil(totalCount / limit);
+  const nextPage = page < totalPages ? page + 1 : null;
+  const previousPage = page > 1 ? page - 1 : null;
+
+  const baseUrl = "http://localhost:3000/";
+  const route = "cars";
+
+  const nextPageUrl = nextPage ? `${baseUrl}${route}?page=${nextPage}&limit=${limit}` : null;
+  const previousPageUrl = previousPage ? `${baseUrl}${route}?page=${previousPage}&limit=${limit}` : null;
+
+  return res.status(200).json({
+    cars,
+    totalCount,
+    currentPage: page,
+    totalPages,
+    nextPage: nextPageUrl,
+    previousPage: previousPageUrl,
+  });
 };
 
 const findCarController = async (req: Request, res: Response) => {

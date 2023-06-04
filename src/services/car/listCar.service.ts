@@ -4,16 +4,40 @@ import { Car } from "../../entities/car.entitie";
 import { TCarsResponse } from "../../interfaces/car.interface";
 import { carsSchemaResponse } from "../../schemas/car.schema";
 
-const listCarsService = async (): Promise<TCarsResponse> => {
+// const listCarsService = async (): Promise<TCarsResponse> => {
+//   const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
+
+//   const cars: Car[] = await carsRepository.find({
+//     relations: { user: true },
+//   });
+
+//   const res = carsSchemaResponse.parse(cars);
+
+//   return res;
+// };
+
+// export { listCarsService };
+
+const listCarsService = async (
+  page: number,
+  limit: number
+): Promise<{ cars: any[]; totalCount: number }> => {
   const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
-  const cars: Car[] = await carsRepository.find({
+  const skip = (page - 1) * limit;
+
+  const [cars, totalCount] = await carsRepository.findAndCount({
     relations: { user: true },
+    skip,
+    take: limit,
   });
 
-  const res = carsSchemaResponse.parse(cars);
+  const parsedCars = carsSchemaResponse.parse(cars);
 
-  return res;
+  return {
+    cars: parsedCars,
+    totalCount,
+  };
 };
 
 export { listCarsService };
