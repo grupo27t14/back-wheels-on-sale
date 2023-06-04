@@ -12,4 +12,13 @@ type TCarResponse = z.infer<typeof carSchema>;
 type TCarsResponse = z.infer<typeof carsSchemaResponse>;
 type TCarUpdateRequest = DeepPartial<TCarRequest>;
 
-export { TCar, TCarRequest, TCarResponse, TCarUpdateRequest, TCarsResponse };
+interface IPaginationCars {
+  next: string | null;
+  previous: string | null;
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  results: TCarsResponse;
+}
+
+export { TCar, TCarRequest, TCarResponse, TCarUpdateRequest, TCarsResponse, IPaginationCars };
