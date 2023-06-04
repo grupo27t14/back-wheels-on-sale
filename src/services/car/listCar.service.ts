@@ -1,43 +1,28 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities/car.entitie";
-import { TCarsResponse } from "../../interfaces/car.interface";
+import { IPaginationCars } from "../../interfaces/car.interface";
 import { carsSchemaResponse } from "../../schemas/car.schema";
-
-// const listCarsService = async (): Promise<TCarsResponse> => {
-//   const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
-
-//   const cars: Car[] = await carsRepository.find({
-//     relations: { user: true },
-//   });
-
-//   const res = carsSchemaResponse.parse(cars);
-
-//   return res;
-// };
-
-// export { listCarsService };
+import { setPagination } from "../../utils/setPagination";
 
 const listCarsService = async (
   page: number,
-  limit: number
-): Promise<{ cars: any[]; totalCount: number }> => {
+  limit: number,
+  baseUrl: string
+): Promise<IPaginationCars> => {
   const carsRepository: Repository<Car> = AppDataSource.getRepository(Car);
 
   const skip = (page - 1) * limit;
-
   const [cars, totalCount] = await carsRepository.findAndCount({
     relations: { user: true },
-    skip,
     take: limit,
+    skip: skip,
   });
 
   const parsedCars = carsSchemaResponse.parse(cars);
+  const rota = `/cars`;
 
-  return {
-    cars: parsedCars,
-    totalCount,
-  };
+  return setPagination(totalCount, limit, page, baseUrl + rota, parsedCars);
 };
 
 export { listCarsService };
