@@ -17,8 +17,15 @@ const listCarsController = async (req: Request, res: Response) => {
   const page = parseInt(req.query.page as string) || 1;
   const limit = parseInt(req.query.limit as string) || 5;
   const baseUrl = req.get('host') as string
+  const filter = {
+    brand: req.query.brand as string | null,
+    model: req.query.model as string | null,
+    color: req.query.color as string | null,
+    year: req.query.year as string | null,
+    sort: req.query.sort as string[] | null
+  }
 
-  const cars = await listCarsService(page, limit, baseUrl);
+  const cars = await listCarsService(page, limit, baseUrl, filter);
 
   return res.status(200).json(cars);
 };
