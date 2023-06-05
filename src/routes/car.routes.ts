@@ -2,6 +2,8 @@ import { Router } from "express";
 import {
   ensureAuthMiddleware,
   ensureDataIsValidMiddleware,
+  ensureIsOwnerMiddlewareCar,
+  ensureUuidIsValidMiddleware,
 } from "../middlewares";
 import {
   createCarController,
@@ -11,13 +13,11 @@ import {
   updateCarController,
 } from "../controllers/car.controller";
 import { carSchemaRequest, carSchemaUpdate } from "../schemas/car.schema";
-import { ensureIsOwnerMiddlewareCar } from "../middlewares/ensureIsOwnerCar.middleware";
-import { ensureUuidIsValidMiddlewareUser } from "../middlewares/ensureUuidIsValid.middleware";
 
 const carRoutes = Router();
 
 carRoutes.get("", listCarsController);
-carRoutes.get("/:id", ensureUuidIsValidMiddlewareUser, findCarController);
+carRoutes.get("/:id", ensureUuidIsValidMiddleware, findCarController);
 
 carRoutes.use(ensureAuthMiddleware);
 
@@ -28,14 +28,14 @@ carRoutes.post(
 );
 carRoutes.patch(
   "/:id",
-  ensureUuidIsValidMiddlewareUser,
+  ensureUuidIsValidMiddleware,
   ensureIsOwnerMiddlewareCar,
   ensureDataIsValidMiddleware(carSchemaUpdate),
   updateCarController
 );
 carRoutes.delete(
   "/:id",
-  ensureUuidIsValidMiddlewareUser,
+  ensureUuidIsValidMiddleware,
   ensureIsOwnerMiddlewareCar,
   deleteCarController
 );

@@ -348,6 +348,59 @@
       }
     },
     "/car/{id}": {
+      "get": {
+        "summary": "Find Car",
+        "description": "This route will find a car by id",
+        "tags": ["Car"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car By ID",
+            "required": true
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "description": "Key para busca",
+            "required": false
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "description": "Key para busca",
+            "required": false
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "description": "Key para busca",
+            "required": false
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Key para busca",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "summary": "Update Veicle",
         "description": "This route will update a veicle",
@@ -436,10 +489,130 @@
           }
         }
       }
+    },
+    "/image/{id}": {
+      "post": {
+        "summary": "Create Image",
+        "description": "This route will add one image to a car",
+        "tags": ["Car", "Image"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Image"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "url": "https://th.bing.com/th/id/R.fc11817b2c60f17167244b14fc90a625?rik=76pH8B4rAgxxzQ&pid=ImgRaw&r=0"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Find"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Image"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List all Images",
+        "description": "This route will list all images from a car",
+        "tags": ["Car", "Image"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car By ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Image"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/{imageId}/car/{carId}": {
+      "delete": {
+        "summary": "Delete Image",
+        "description": "This route will delete one image from a car",
+        "tags": ["Car", "Image"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "imageId",
+            "in": "path",
+            "description": "Image ID",
+            "required": true
+          },
+          {
+            "name": "carId",
+            "in": "path",
+            "description": "Car ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unautorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Image": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
       "Login": {
         "type": "object",
         "properties": {
