@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { isValidUUID } from "../utils/uuidUtils";
 
-const ensureUuidIsValidMiddlewareUser = async (
+const ensureUuidIsValidMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -17,4 +17,4 @@ const ensureUuidIsValidMiddlewareUser = async (
   return next();
 };
 
-export { ensureUuidIsValidMiddlewareUser };
+export { ensureUuidIsValidMiddleware };

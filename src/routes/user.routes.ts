@@ -11,9 +11,9 @@ import {
   ensureAuthMiddleware,
   ensureDataIsValidMiddleware,
   ensureIsOwnerMiddlewareUser,
+  ensureUuidIsValidMiddleware,
 } from "../middlewares";
 import { userSchemaReq, userSchemaUpdate } from "../schemas/user.schema";
-import { ensureUuidIsValidMiddlewareUser } from "../middlewares/ensureUuidIsValid.middleware";
 
 const userRoutes = Router();
 
@@ -25,14 +25,14 @@ userRoutes.post(
 
 userRoutes.get("", listUserController);
 
-userRoutes.get("/:id", ensureUuidIsValidMiddlewareUser, findUserController);
+userRoutes.get("/:id", ensureUuidIsValidMiddleware, findUserController);
 
 userRoutes.get("/:id/cars", listUserCarsController);
 
 userRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
-  ensureUuidIsValidMiddlewareUser,
+  ensureUuidIsValidMiddleware,
   ensureIsOwnerMiddlewareUser,
   ensureDataIsValidMiddleware(userSchemaUpdate),
   updateUserController
@@ -40,7 +40,7 @@ userRoutes.patch(
 userRoutes.delete(
   "/:id",
   ensureAuthMiddleware,
-  ensureUuidIsValidMiddlewareUser,
+  ensureUuidIsValidMiddleware,
   ensureIsOwnerMiddlewareUser,
   deleteUserController
 );
