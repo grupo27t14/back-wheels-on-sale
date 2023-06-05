@@ -8,6 +8,7 @@ import { userRoutes } from "./routes/user.routes";
 import { loginRoutes } from "./routes/login.routes";
 import { carRoutes } from "./routes/car.routes";
 import swaggerDocs from "./swagger.json"
+import { imageRoutes } from "./routes/image.routes";
 
 const app: Application = express();
 
@@ -19,6 +20,7 @@ app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use("/user", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/car", carRoutes);
+app.use("/image", imageRoutes)
 
 app.use(handleErrorMiddleware);
 
