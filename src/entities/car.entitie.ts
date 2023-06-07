@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { User } from "./user.entitie";
 import { Images } from "./images.entitie";
+import { Comment } from "./coment.entitie";
 
 @Entity("cars")
 export class Car {
@@ -50,6 +51,9 @@ export class Car {
 
   @ManyToOne(() => User, (user) => user.cars, { onDelete: "CASCADE" })
   user: User;
+
+  @OneToMany(() => Comment, (comment) => comment.car)
+  comments: Comment[];
 
   @OneToMany(() => Images, (image) => image.car)
   images: Images[];

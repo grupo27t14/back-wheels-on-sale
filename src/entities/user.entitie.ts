@@ -7,11 +7,13 @@ import {
   BeforeInsert,
   BeforeUpdate,
   CreateDateColumn,
+  ManyToOne,
 } from "typeorm";
 import { PersonalInformation } from "./personalInformation.entitie";
 import { AddressInformation } from "./addressInformation.entitie";
 import { Car } from "./car.entitie";
 import { getRounds, hashSync } from "bcryptjs";
+import { Comment } from "./coment.entitie";
 
 @Entity("users")
 export class User {
@@ -35,6 +37,9 @@ export class User {
 
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 
   @OneToOne(
     () => PersonalInformation,
@@ -61,5 +66,4 @@ export class User {
       this.password = hashSync(this.password, 10);
     }
   }
-  
 }
