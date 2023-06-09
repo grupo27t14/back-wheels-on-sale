@@ -14,6 +14,13 @@ import { imageSchemaReq } from "../schemas/image.schema";
 
 const imageRoutes = Router();
 
+
+imageRoutes.get(
+  "/:id",
+  ensureUuidIsValidMiddleware,
+  listImagesController
+);
+
 imageRoutes.use(ensureAuthMiddleware);
 
 imageRoutes.post(
@@ -23,12 +30,7 @@ imageRoutes.post(
   ensureDataIsValidMiddleware(imageSchemaReq),
   createImageController
 );
-imageRoutes.get(
-  "/:id",
-  ensureUuidIsValidMiddleware,
-  ensureIsOwnerMiddlewareCar,
-  listImagesController
-);
+
 imageRoutes.delete(
   "/:imageId/car/:carId",
   ensureIsOwnerMiddlewareCar,
