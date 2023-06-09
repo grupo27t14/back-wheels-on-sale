@@ -3,6 +3,7 @@ import {
   createUserController,
   deleteUserController,
   findUserController,
+  getMyDataController,
   listUserCarsController,
   listUserController,
   updateUserController,
@@ -24,6 +25,8 @@ userRoutes.post(
 );
 
 userRoutes.get("", listUserController);
+
+userRoutes.get("/me", ensureAuthMiddleware, getMyDataController);
 
 userRoutes.get("/:id", ensureUuidIsValidMiddleware, findUserController);
 
