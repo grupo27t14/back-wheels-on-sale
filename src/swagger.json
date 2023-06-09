@@ -11,13 +11,13 @@
   "servers": [
     {
       "url": "http://localhost:3000",
-      "descrtiption": "Local API"
+      "description": "Local API"
     }
   ],
   "paths": {
     "/login": {
       "post": {
-        "sumary": "User Login",
+        "summary": "User Login",
         "description": "This route will log user in",
         "tags": ["Login"],
         "requestBody": {
@@ -122,6 +122,37 @@
         "description": "This route will show all users",
         "tags": ["User"],
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/me": {
+      "get": {
+        "summary": "Find User by Token",
+        "description": "This route will find a user",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Token do Portador (Bearer Token)",
+            "required": true
+            }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -496,6 +527,14 @@
         "description": "This route will add one image to a car",
         "tags": ["Car", "Image"],
         "security": [{ "bearerAuth": [] }],
+                "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car By ID",
+            "required": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -601,10 +640,172 @@
           }
         }
       }
+    },
+    "/comments": {
+      "get": {
+        "summary": "List All Comments",
+        "description": "This route will list all comments from a car",
+        "tags": ["Car", "Comment"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "post": {
+        "summary": "Create Comment",
+        "description": "This route will add one comment to a car",
+        "tags": ["Car", "Comment"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car ID",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "description": "Carro de único dono, pouco rodado"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Find"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Comment",
+        "description": "This route will update one comment from a car",
+        "tags": ["Car", "Comment"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Comment ID",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              },
+              "examples": {
+                "car": {
+                  "value": {
+                    "description": "Carro de único dono, pouco rodado, sem pneu reserva"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unautorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Comment",
+        "description": "This route will delete one comment from a car",
+        "tags": ["Car", "Comment"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Comment ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unautorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        }
+      },
       "Image": {
         "type": "object",
         "properties": {
