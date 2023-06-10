@@ -2,11 +2,21 @@ import { Request, Response } from "express";
 import { createImageService } from "../services/image/createImage.service";
 import { deleteImageService } from "../services/image/deleteImage.service";
 import { listImagesService } from "../services/image/listImage.service";
+import { uploadToCloudinary } from "../utils/cloudinaryConfig";
+
+// const createImageController = async (req: Request, res: Response) => {
+//   const carId = req.params.id;
+//   const { url } = req.body;
+//   const image = await createImageService(url, carId);
+
+//   return res.json(image);
+// };
 
 const createImageController = async (req: Request, res: Response) => {
   const carId = req.params.id;
-  const { url } = req.body;
-  const image = await createImageService(url, carId);
+  const file: any = req.file;
+  const imageUrl: any = await uploadToCloudinary(file);
+  const image = await createImageService(imageUrl, carId);
 
   return res.json(image);
 };

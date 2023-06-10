@@ -525,7 +525,7 @@
       "post": {
         "summary": "Create Image",
         "description": "This route will add one image to a car",
-        "tags": ["Car", "Image"],
+        "tags": ["Image"],
         "security": [{ "bearerAuth": [] }],
                 "parameters": [
           {
@@ -577,7 +577,7 @@
       "get": {
         "summary": "List all Images",
         "description": "This route will list all images from a car",
-        "tags": ["Car", "Image"],
+        "tags": ["Image"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
@@ -609,7 +609,7 @@
       "delete": {
         "summary": "Delete Image",
         "description": "This route will delete one image from a car",
-        "tags": ["Car", "Image"],
+        "tags": ["Image"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
@@ -645,7 +645,7 @@
       "get": {
         "summary": "List All Comments",
         "description": "This route will list all comments from a car",
-        "tags": ["Car", "Comment"],
+        "tags": ["Comment"],
         "responses": {
           "200": {
             "description": "OK",
@@ -665,7 +665,7 @@
       "post": {
         "summary": "Create Comment",
         "description": "This route will add one comment to a car",
-        "tags": ["Car", "Comment"],
+        "tags": ["Comment"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
@@ -717,7 +717,7 @@
       "patch": {
         "summary": "Update Comment",
         "description": "This route will update one comment from a car",
-        "tags": ["Car", "Comment"],
+        "tags": ["Comment"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
@@ -769,7 +769,7 @@
       "delete": {
         "summary": "Delete Comment",
         "description": "This route will delete one comment from a car",
-        "tags": ["Car", "Comment"],
+        "tags": ["Comment"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
