@@ -5,11 +5,11 @@ const imageSchema = z.object({
   url: z.string(),
 });
 
-const imageSchemaRes = imageSchema
+const imageSchemaRes = imageSchema;
 
-const imageSchemaReq = imageSchema.omit({
-    id: true,
-  });
+const imageSchemaReq = z.object({
+  image: z.unknown(),
+});
 
 const imagesSchemaRes = z.array(imageSchemaRes);
 

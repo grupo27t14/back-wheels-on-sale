@@ -11,9 +11,9 @@ import {
   ensureUuidIsValidMiddleware,
 } from "../middlewares";
 import { imageSchemaReq } from "../schemas/image.schema";
+import { upload } from "../utils/multerConfig";
 
 const imageRoutes = Router();
-
 
 imageRoutes.get(
   "/:id",
@@ -28,6 +28,7 @@ imageRoutes.post(
   ensureUuidIsValidMiddleware,
   ensureIsOwnerMiddlewareCar,
   ensureDataIsValidMiddleware(imageSchemaReq),
+  upload.single("image"),
   createImageController
 );
 
