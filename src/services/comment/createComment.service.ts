@@ -3,9 +3,10 @@ import { Car } from "../../entities/car.entitie";
 import { Comment } from "../../entities/coment.entitie";
 import { User } from "../../entities/user.entitie";
 import AppError from "../../errors/AppErrors";
+import { TcommentReq } from "../../interfaces/comment.interface";
 
 const createCommentService = async (
-  commentData: string,
+  commentData: TcommentReq,
   carId: string,
   userId: string
 ) => {
@@ -32,7 +33,7 @@ const createCommentService = async (
   }
 
   const newComment = commentRepository.create({
-    description: commentData,
+    description: commentData.description,
     car: car,
     user: user,
   });

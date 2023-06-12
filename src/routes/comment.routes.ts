@@ -8,6 +8,7 @@ import {
 import {
   ensureAuthMiddleware,
   ensureDataIsValidMiddleware,
+  ensureIsOwnerMiddlewareCar,
 } from "../middlewares";
 import { commentSchemaRequest } from "../schemas/comment.schema";
 
@@ -19,7 +20,7 @@ commentRoutes.post(
   ensureDataIsValidMiddleware(commentSchemaRequest),
   createCommentController
 );
-commentRoutes.get("", listCommentsController);
+commentRoutes.get("/:id", listCommentsController);
 commentRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
