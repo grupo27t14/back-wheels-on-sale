@@ -4,6 +4,7 @@ import { Car } from "../../entities/car.entitie";
 import { IPaginationCars } from "../../interfaces/car.interface";
 import { carsSchemaResponse } from "../../schemas/car.schema";
 import { setPagination } from "../../utils/setPagination";
+import { log } from "console";
 
 interface iFilter {
   brand: string | null;
@@ -53,12 +54,15 @@ const listCarsService = async (
 
   const skip = (page - 1) * limit;
   const [cars, totalCount] = await carsRepository.findAndCount({
-    relations: { user: true },
+    relations: ["user", "images"],
     take: limit,
     skip: skip,
     where: where,
     order: order,
   });
+
+  console.log(cars);
+  
 
   const parsedCars = carsSchemaResponse.parse(cars);
   const rota = `/cars`;
