@@ -24,7 +24,7 @@ const carSchemaRes = carSchema.extend({
   images: z.object({
     id: z.string(),
     url: z.string()
-  }).array()
+  }).array().optional()
 });
 
 const carSchemaRequest = carSchema.omit({
