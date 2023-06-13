@@ -23,6 +23,10 @@ const createCarService = async (
     throw new AppError("User not found", 404);
   }
 
+  if (!user.is_seller) {
+    throw new AppError("Only vendors can sell cars", 403);
+  }
+
   const car: Car = carsRepository.create({
     ...data,
     user,

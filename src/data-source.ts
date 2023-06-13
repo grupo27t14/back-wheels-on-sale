@@ -3,8 +3,9 @@ import "reflect-metadata";
 import path from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
+import { SeederOptions } from "typeorm-extension";
 
-const dataSourceConfig = (): DataSourceOptions => {
+const dataSourceConfig = (): DataSourceOptions & SeederOptions => {
   const entitiePath: string = path.join(__dirname, "./entities/**.{ts,js}");
   const migrationsPath: string = path.join(
     __dirname,
@@ -34,6 +35,7 @@ const dataSourceConfig = (): DataSourceOptions => {
     logging: true,
     migrations: [migrationsPath],
     entities: [entitiePath],
+    seeds: []
   } as PostgresConnectionOptions;
 };
 
