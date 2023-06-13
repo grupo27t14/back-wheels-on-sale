@@ -646,6 +646,14 @@
         "summary": "List All Comments",
         "description": "This route will list all comments from a car",
         "tags": ["Comment"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car ID",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
