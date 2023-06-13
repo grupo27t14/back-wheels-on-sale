@@ -1,12 +1,4 @@
 import { z } from "zod";
-const userSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string().email(),
-  password: z.string(),
-  is_admin: z.boolean().default(false),
-  is_seller: z.boolean().default(false),
-});
 
 const commentSchema = z.object({
   id: z.string(),

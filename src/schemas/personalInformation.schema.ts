@@ -4,7 +4,7 @@ const personalInformationSchemaReq = z.object({
   cpf: z.string(),
   phone: z.string(),
   birth_date: z.string(),
-  description: z.string(),
+  description: z.string().nullish().optional(),
 });
 
 const personalInformationSchemaRes = personalInformationSchemaReq.extend({

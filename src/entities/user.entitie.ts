@@ -7,7 +7,6 @@ import {
   BeforeInsert,
   BeforeUpdate,
   CreateDateColumn,
-  ManyToOne,
 } from "typeorm";
 import { PersonalInformation } from "./personalInformation.entitie";
 import { AddressInformation } from "./addressInformation.entitie";
@@ -37,6 +36,9 @@ export class User {
 
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
+
+  @Column()
+  avatar_bg: string;
 
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];

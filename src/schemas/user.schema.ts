@@ -17,6 +17,7 @@ const userSchema = z.object({
   password: z.string(),
   is_admin: z.boolean().default(false),
   is_seller: z.boolean().default(false),
+  avatar_bg: z.string(),
 });
 
 const userSchemaRes = userSchema

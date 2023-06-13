@@ -6,7 +6,7 @@ const addressInformationSchemaReq = z.object({
   city: z.string(),
   street: z.string(),
   number: z.string(),
-  complement: z.string(),
+  complement: z.string().nullish().optional(),
 });
 
 const addressInformationSchemaRes = addressInformationSchemaReq.extend({
