@@ -5,7 +5,7 @@ import AppError from "../../errors/AppErrors";
 const updateCommentService = async (
   commentId: string,
   commentData: string
-): Promise<Comment> => {
+): Promise<any> => {
   const commentRepository = AppDataSource.getRepository(Comment);
 
   const comment = await commentRepository.findOne({

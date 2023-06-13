@@ -24,7 +24,6 @@ const dataSourceConfig = (): DataSourceOptions & SeederOptions => {
   }
 
   const dbUrl: string | undefined = process.env.DATABASE_URL;
-  console.log(dbUrl);
 
   if (!dbUrl) throw new Error("Env var DATABASE_URL does not exists");
 

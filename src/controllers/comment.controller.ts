@@ -22,15 +22,15 @@ const listCommentsController = async (req: Request, res: Response) => {
 };
 const updateCommentController = async (req: Request, res: Response) => {
   const commentId = req.params.id;
-  const commentData = req.body;
-  const updated = await updateCommentService(commentId, commentData);
+  const {description} = req.body;
+  const updated = await updateCommentService(commentId, description);
 
   return res.status(200).json(updated);
 };
 
 const deleteCommentController = async (req: Request, res: Response) => {
   const commentId = req.params.id;
-  const deleted = await deleteCommentService(commentId);
+  await deleteCommentService(commentId);
 
   return res.status(204).send();
 };
