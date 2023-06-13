@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 import { User } from "./user.entitie";
 
 @Entity("personal_informations")
@@ -15,10 +21,12 @@ export class PersonalInformation {
   @Column()
   birth_date: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true, type: "varchar" })
+  description?: string | null | undefined;
 
-  @OneToOne(() => User, (user) => user.personalInformation, { onDelete: "CASCADE" })
+  @OneToOne(() => User, (user) => user.personalInformation, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   user: User;
 }
