@@ -30,7 +30,7 @@ export class CarSeeder implements Seeder {
         car.price = vehicle.price;
         car.is_promo = vehicle.is_promo;
         car.description = vehicle.description;
-        car.is_published = false;
+        car.is_published = true;
         car.created_at = new Date();
 
         car.user = user; // Associar o carro ao usuário atual
