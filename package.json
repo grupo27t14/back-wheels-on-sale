@@ -24,6 +24,7 @@
     "swagger-ui-express": "^4.6.3",
     "ts-node": "^10.9.1",
     "typeorm": "^0.3.16",
+    "typeorm-extension": "^2.8.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {

@@ -23,6 +23,7 @@ carRoutes.use(ensureAuthMiddleware);
 
 carRoutes.post(
   "",
+  // ensureIsOwnerMiddlewareCar,
   ensureDataIsValidMiddleware(carSchemaRequest),
   createCarController
 );

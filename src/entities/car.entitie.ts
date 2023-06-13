@@ -6,6 +6,7 @@ import {
   OneToMany,
   BeforeInsert,
   CreateDateColumn,
+  BeforeUpdate,
 } from "typeorm";
 import { User } from "./user.entitie";
 import { Images } from "./images.entitie";
@@ -62,6 +63,7 @@ export class Car {
   images: Images[];
 
   @BeforeInsert()
+  @BeforeUpdate()
   setIsPromo() {
     const fipe = Number(this.fipe);
     const price = Number(this.price);
