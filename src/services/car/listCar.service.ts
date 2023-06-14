@@ -61,7 +61,7 @@ const listCarsService = async (
   });
 
   const parsedCars = carsSchemaResponse.parse(cars);
-  const rota = `/cars`;
+  const rota = `/car`;
 
   return setPagination(
     totalCount,

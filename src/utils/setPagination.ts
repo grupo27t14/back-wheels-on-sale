@@ -11,9 +11,9 @@ export const setPagination = (
   const nextPage = page < totalPages ? page + 1 : null;
   const previousPage = page > 1 ? page - 1 : null;
 
-  let nextPageUrl = nextPage ? `https://${baseUrl}?page=${nextPage}` : null;
+  let nextPageUrl = nextPage ? `${baseUrl}?page=${nextPage}` : null;
   let previousPageUrl = previousPage
-    ? `https://${baseUrl}?page=${previousPage}`
+    ? `${baseUrl}?page=${previousPage}`
     : null;
 
   if (limit) {

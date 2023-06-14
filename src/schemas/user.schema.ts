@@ -51,4 +51,4 @@ const userSchemaUpdate = userSchema
 
 const usersSchemaRes = z.array(userSchemaRes);
 
-export { userSchemaRes, userSchemaReq, userSchemaUpdate, usersSchemaRes };
+export { userSchemaRes, userSchemaReq, userSchemaUpdate, usersSchemaRes, userSchema };

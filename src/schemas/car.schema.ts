@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { userSchemaRes } from "./user.schema";
 
 const carSchema = z.object({
   id: z.string(),
@@ -20,18 +21,24 @@ const carSchemaRes = carSchema.extend({
   user: z.object({
     id: z.string(),
     name: z.string(),
-  avatar_bg: z.string()
+    avatar_bg: z.string(),
+    personalInformation: z.object({
+      description: z.string().nullable().optional(),
+    }).optional(),
   }),
-  images: z.object({
-    id: z.string(),
-    url: z.string()
-  }).array().optional()
+  images: z
+    .object({
+      id: z.string(),
+      url: z.string(),
+    })
+    .array()
+    .optional(),
 });
 
 const carSchemaRequest = carSchema.omit({
   id: true,
   is_promo: true,
-  is_published: true
+  is_published: true,
 });
 
 const carSchemaUpdate = carSchemaRequest.partial();

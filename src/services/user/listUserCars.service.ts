@@ -19,6 +19,7 @@ const listUserCarsService = async (
 
   const user = (await userRepository.findOne({
     where: { id: userId },
+    relations: {personalInformation: true}
   })) as TUserRes;
 
   if (!user) {
@@ -30,12 +31,15 @@ const listUserCarsService = async (
   const [cars, totalCount] = await carsRepository
     .createQueryBuilder("car")
     .leftJoinAndSelect("car.user", "user")
+    .leftJoinAndSelect("car.images", "images")
+    .leftJoinAndSelect("user.personalInformation", "pi")
     .where("user.id = :userId", { userId })
     .skip(skip)
     .take(limit)
     .getManyAndCount();
 
   const parsedCars = carsSchemaResponse.parse(cars);
+
   const rota = `user/${userId}/cars`;
 
     return setPagination(totalCount, limit, page, baseUrl + rota, parsedCars);
