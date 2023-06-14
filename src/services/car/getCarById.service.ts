@@ -12,7 +12,10 @@ const findCarService = async (id: string): Promise<any> => {
       id: id,
     },
     relations: {
-      user: true,
+      user: {
+        personalInformation: true,
+      },
+      images: true,
     },
   });
 
