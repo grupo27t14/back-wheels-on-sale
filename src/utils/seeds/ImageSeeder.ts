@@ -1,9 +1,9 @@
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
-import { Car } from "../entities/car.entitie";
-import { Images } from "../entities/images.entitie";
+import { Car } from "../../entities/car.entitie";
+import { Images } from "../../entities/images.entitie";
 import { DataSource } from "typeorm";
 import { vehicles } from "./veicleData";
-import getRandomInt from "../utils/random";
+import { randomNumbers } from "../../utils/random";
 
 export class ImageSeeder implements Seeder {
   async run(dataSource: DataSource, factoryManager: SeederFactoryManager): Promise<any> {
@@ -18,7 +18,7 @@ export class ImageSeeder implements Seeder {
       const vehicle = vehicles.find((vehicle) => vehicle.model === model);
 
       if (vehicle && vehicle.images) { // Verificar se vehicle.images não é undefined
-        const randomIndex = getRandomInt(0, vehicle.images.length - 1);
+        const randomIndex = randomNumbers(0, vehicle.images.length - 1);
         const imageUrl = vehicle.images[randomIndex];
 
         const image = new Images();

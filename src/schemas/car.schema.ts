@@ -20,6 +20,7 @@ const carSchemaRes = carSchema.extend({
   user: z.object({
     id: z.string(),
     name: z.string(),
+  avatar_bg: z.string()
   }),
   images: z.object({
     id: z.string(),
