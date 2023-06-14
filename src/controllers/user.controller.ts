@@ -22,7 +22,7 @@ async function findUserController(req: Request, res: Response) {
 }
 
 async function getMyDataController(req: Request, res: Response) {
-  const idUser = req.params.id;
+  const idUser = res.locals.userId;
   const user = await getMyDataService(idUser)
 
   return res.status(200).json(user);
