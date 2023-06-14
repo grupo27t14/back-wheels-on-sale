@@ -4,7 +4,8 @@ import path from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 import { SeederOptions } from "typeorm-extension";
-import { MainSeeder } from "./seeds/MainSeeder";
+import { MainSeeder } from "./utils/seeds/MainSeeder";
+
 
 const dataSourceConfig = (): DataSourceOptions & SeederOptions => {
   const entitiePath: string = path.join(__dirname, "./entities/**.{ts,js}");

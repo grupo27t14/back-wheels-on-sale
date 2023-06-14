@@ -1,14 +1,18 @@
 import { DataSource } from "typeorm";
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
-import { User } from "../entities/user.entitie";
-import { PersonalInformation } from "../entities/personalInformation.entitie";
-import { AddressInformation } from "../entities/addressInformation.entitie";
+import { User } from "../../entities/user.entitie";
+import { PersonalInformation } from "../../entities/personalInformation.entitie";
+import { AddressInformation } from "../../entities/addressInformation.entitie";
 import bcrypt from "bcryptjs";
+import { randomColorAvatar } from "../../utils/random";
+
+
+
 
 export class UserSeeder implements Seeder {
   async run(dataSource: DataSource, factoryManager: SeederFactoryManager): Promise<any> {
     const userRepository = dataSource.getRepository(User);
-    const personalInformationRepository = dataSource.getRepository(PersonalInformation);
+    // const personalInformationRepository = dataSource.getRepository(PersonalInformation);
 
     for (let i = 0; i < 5; i++) {
       const user = new User();
@@ -35,7 +39,7 @@ export class UserSeeder implements Seeder {
       user.password = await bcrypt.hash("1234", 10);
       user.is_admin = false;
       user.is_seller = true;
-      user.avatar_bg = "";
+      user.avatar_bg = `${randomColorAvatar()}`;
 
       const personalInformation = new PersonalInformation();
       personalInformation.cpf = "12345678900";

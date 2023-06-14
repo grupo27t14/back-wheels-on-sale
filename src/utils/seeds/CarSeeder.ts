@@ -1,10 +1,12 @@
 import { DataSource } from "typeorm";
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
-import { Car } from "../entities/car.entitie";
-import { User } from "../entities/user.entitie";
 
-import getRandomInt from "../utils/random";
+import { Car } from "../../entities/car.entitie";
+import { User } from "../../entities/user.entitie";
+
 import { vehicles } from "./veicleData";
+import { randomNumbers } from "../../utils/random";
+
 
 
 export class CarSeeder implements Seeder {
@@ -16,7 +18,7 @@ export class CarSeeder implements Seeder {
 
     for (const user of users) {
       for (let i = 0; i < 5; i++) {
-        const randomIndex = getRandomInt(0, vehicles.length - 1);
+        const randomIndex = randomNumbers(0, vehicles.length);
         const vehicle = vehicles[randomIndex];
 
         const car = new Car();
