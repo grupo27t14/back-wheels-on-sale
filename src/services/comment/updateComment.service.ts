@@ -1,6 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { Comment } from "../../entities/coment.entitie";
 import AppError from "../../errors/AppErrors";
+import { commentSchemaResponse } from "../../schemas/comment.schema";
 
 const updateCommentService = async (
   commentId: string,
