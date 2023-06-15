@@ -4,6 +4,7 @@ import { Comment } from "../../entities/coment.entitie";
 import { User } from "../../entities/user.entitie";
 import AppError from "../../errors/AppErrors";
 import { TcommentReq } from "../../interfaces/comment.interface";
+import { commentSchemaResponse } from "../../schemas/comment.schema";
 
 const createCommentService = async (
   commentData: TcommentReq,
@@ -40,7 +41,7 @@ const createCommentService = async (
 
   await commentRepository.save(newComment);
 
-  return newComment;
+  return commentSchemaResponse.parse(newComment);
 };
 
 export { createCommentService };

@@ -14,8 +14,6 @@ import { commentSchemaRequest } from "../schemas/comment.schema";
 
 const commentRoutes = Router();
 
-// commentRoutes.use(ensureUuidIsValidMiddleware)
-
 commentRoutes.post(
   "/:id",
   ensureUuidIsValidMiddleware,
@@ -31,6 +29,11 @@ commentRoutes.patch(
   ensureDataIsValidMiddleware(commentSchemaRequest),
   updateCommentController
 );
-commentRoutes.delete("/:id", ensureUuidIsValidMiddleware, ensureAuthMiddleware, deleteCommentController);
+commentRoutes.delete(
+  "/:id",
+  ensureUuidIsValidMiddleware,
+  ensureAuthMiddleware,
+  deleteCommentController
+);
 
 export { commentRoutes };
