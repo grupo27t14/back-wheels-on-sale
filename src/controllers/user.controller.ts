@@ -31,7 +31,7 @@ async function getMyDataController(req: Request, res: Response) {
 async function listUserCarsController(req: Request, res: Response) {
   const userId = req.params.id;
   const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 2;
+  const limit = parseInt(req.query.limit as string) || 16;
   const baseUrl = req.get('host') as string;
   const userCars = await listUserCarsService(userId, page, limit, baseUrl);
 
