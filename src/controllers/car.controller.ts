@@ -16,14 +16,20 @@ const createCarController = async (req: Request, res: Response) => {
 const listCarsController = async (req: Request, res: Response) => {
   const page = parseInt(req.query.page as string) || 1;
   const limit = parseInt(req.query.limit as string) || 12;
-  const baseUrl = req.get('host') as string
+  const baseUrl = req.get("host") as string;
   const filter = {
-    brand: req.query.brand as string | null,
-    model: req.query.model as string | null,
-    color: req.query.color as string | null,
-    year: req.query.year as string | null,
-    sort: req.query.sort as string[] | null
-  }
+    where: {
+      brand: req.query.brand as string | null,
+      model: req.query.model as string | null,
+      color: req.query.color as string | null,
+      year: req.query.year as string | null,
+    },
+    sort: req.query.sort as string[] | null,
+    minmax: {
+      km: req.query.km as string | null,
+      price: req.query.price as string | null,
+    },
+  };
 
   const cars = await listCarsService(page, limit, baseUrl, filter);
 

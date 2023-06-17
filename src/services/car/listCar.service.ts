@@ -1,16 +1,23 @@
-import { Repository } from "typeorm";
+import { Repository, Between } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities/car.entitie";
 import { IPaginationCars } from "../../interfaces/car.interface";
 import { carsSchemaResponse } from "../../schemas/car.schema";
 import { setPagination } from "../../utils/setPagination";
+import AppError from "../../errors/AppErrors";
 
 interface iFilter {
-  brand: string | null;
-  model: string | null;
-  color: string | null;
-  year: string | null;
+  where: {
+    brand: string | null;
+    model: string | null;
+    color: string | null;
+    year: string | null;
+  };
   sort?: string[] | null;
+  minmax: {
+    km?: string | null;
+    price?: string | null;
+  };
 }
 
 const getOrderAndSort = (filter: iFilter) => {
@@ -19,22 +26,34 @@ const getOrderAndSort = (filter: iFilter) => {
     const sorter = typeof filter.sort == "string" ? [filter.sort] : filter.sort;
     sorter.forEach((value) => {
       const data: string[] = value.split("-");
-      const [k, v] = data;
+      const [key, val] = data;
       order = {
         ...order,
-        [k]: v,
+        [key]: val,
       };
     });
-    delete filter.sort;
   }
 
   let where = {};
-  for (const [key, value] of Object.entries(filter)) {
+  for (const [key, value] of Object.entries(filter.where)) {
     if (value != undefined) {
       where = {
         ...where,
         [key]: value,
       };
+    }
+  }
+
+  if (Object.keys(filter.minmax).length) {
+    for (const [key, value] of Object.entries(filter.minmax)) {
+      if (value && key) {
+        const [min, max] = value?.split("_");
+        if (min > max) throw new AppError("Invalid Min/Max query", 400);
+        where = {
+          ...where,
+          [key]: Between(min, max),
+        };
+      }
     }
   }
 
