@@ -30,7 +30,7 @@ export class Car {
   fuel: string;
 
   @Column()
-  km: string;
+  km: number;
 
   @Column()
   color: string;
@@ -39,7 +39,7 @@ export class Car {
   fipe: string;
 
   @Column()
-  price: string;
+  price: number;
 
   @Column()
   description: string;

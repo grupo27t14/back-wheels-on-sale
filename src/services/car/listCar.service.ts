@@ -1,4 +1,4 @@
-import { Repository, Between } from "typeorm";
+import { Repository, Between, LessThan, MoreThan } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities/car.entitie";
 import { IPaginationCars } from "../../interfaces/car.interface";
@@ -47,12 +47,26 @@ const getOrderAndSort = (filter: iFilter) => {
   if (Object.keys(filter.minmax).length) {
     for (const [key, value] of Object.entries(filter.minmax)) {
       if (value && key) {
-        const [min, max] = value?.split("_");
+        let values = value?.split("_");
+        const min = Number(values[0]);
+        const max = Number(values[1]);
         if (min > max) throw new AppError("Invalid Min/Max query", 400);
-        where = {
-          ...where,
-          [key]: Between(min, max),
-        };
+        if (min && max) {
+          where = {
+            ...where,
+            [key]: Between(min, max),
+          };
+        } else if (min && !max) {
+          where = {
+            ...where,
+            [key]: MoreThan(min),
+          };
+        } else if (!min && max) {
+          where = {
+            ...where,
+            [key]: LessThan(max),
+          };
+        }
       }
     }
   }
