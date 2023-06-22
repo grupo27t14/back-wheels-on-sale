@@ -28,6 +28,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column({ nullable: true, type: "varchar" })
+  reset_password: string | null;
+
   @Column({ default: false })
   is_admin: boolean;
 
