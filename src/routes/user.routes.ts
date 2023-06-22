@@ -6,6 +6,8 @@ import {
   getMyDataController,
   listUserCarsController,
   listUserController,
+  resetPasswordController,
+  sendResetPasswordEmailController,
   updateUserController,
 } from "../controllers/user.controller";
 import {
@@ -24,6 +26,11 @@ userRoutes.post(
   createUserController
 );
 
+userRoutes.post(
+  "/resetPassword",
+  sendResetPasswordEmailController
+)
+
 userRoutes.get("", listUserController);
 
 userRoutes.get("/me", ensureAuthMiddleware, getMyDataController);
@@ -40,6 +47,12 @@ userRoutes.patch(
   ensureDataIsValidMiddleware(userSchemaUpdate),
   updateUserController
 );
+
+userRoutes.patch(
+  "/resetPassword/:token",
+  resetPasswordController
+)
+
 userRoutes.delete(
   "/:id",
   ensureAuthMiddleware,

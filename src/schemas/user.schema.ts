@@ -18,6 +18,7 @@ const userSchema = z.object({
   is_admin: z.boolean().default(false),
   is_seller: z.boolean().default(false),
   avatar_bg: z.string(),
+  reset_password: z.string().nullable()
 });
 
 const userSchemaRes = userSchema
@@ -28,6 +29,7 @@ const userSchemaRes = userSchema
   })
   .omit({
     password: true,
+    reset_password: true,
   });
 
 const userSchemaReq = userSchema
@@ -37,6 +39,7 @@ const userSchemaReq = userSchema
   })
   .omit({
     id: true,
+    reset_password: true,
   });
 
 const userSchemaUpdate = userSchema
@@ -46,9 +49,16 @@ const userSchemaUpdate = userSchema
   })
   .omit({
     id: true,
+    reset_password: true,
   })
   .partial();
 
 const usersSchemaRes = z.array(userSchemaRes);
 
-export { userSchemaRes, userSchemaReq, userSchemaUpdate, usersSchemaRes, userSchema };
+const emailReq = z.object({
+  to: z.string(),
+  subject: z.string(),
+  text: z.string()
+})
+
+export { userSchemaRes, userSchemaReq, userSchemaUpdate, usersSchemaRes, userSchema, emailReq };

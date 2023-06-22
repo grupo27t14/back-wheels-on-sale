@@ -6,6 +6,8 @@ import deleteUserService from "../services/user/deleteUser.service";
 import findUserService from "../services/user/getUserById.service";
 import listUserCarsService from "../services/user/listUserCars.service";
 import getMyDataService from "../services/user/getMyData.service";
+import sendEmailResetPasswordService from "../services/user/sendResetPassword.service";
+import resetPasswordService from "../services/user/resetPassword.service";
 
 
 async function listUserController(req: Request, res: Response) {
@@ -59,6 +61,25 @@ async function deleteUserController(req: Request, res: Response) {
   return res.status(204).send();
 }
 
+
+async function sendResetPasswordEmailController(req: Request, res: Response) {
+  const { email } = req.body
+
+  await sendEmailResetPasswordService(email)
+
+  return res.json({ message: "token send" })
+}
+
+async function resetPasswordController(req: Request, res: Response) {
+  const { password } = req.body
+  const { token } = req.params
+
+  await resetPasswordService(password, token)
+
+  return res.json({ message: "Password updated with success"})
+}
+
+
 export {
   listUserController,
   findUserController,
@@ -66,5 +87,7 @@ export {
   createUserController,
   updateUserController,
   deleteUserController,
-  getMyDataController
+  getMyDataController,
+  sendResetPasswordEmailController,
+  resetPasswordController
 };
