@@ -4,6 +4,7 @@ const carSchema = z.object({
   id: z.string(),
   brand: z.string(),
   model: z.string(),
+  spec: z.string(),
   year: z.string(),
   fuel: z.string(),
   km: z.number(),

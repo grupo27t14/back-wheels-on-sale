@@ -24,6 +24,9 @@ export class Car {
   model: string;
 
   @Column()
+  spec: string;
+
+  @Column()
   year: string;
 
   @Column()
