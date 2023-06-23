@@ -2,6 +2,7 @@ export const vehicles = [
   {
     brand: "Fiat",
     model: "Uno",
+    spec: "Uno v1",
     year: "2022",
     fuel: "Gasolina",
     km: 10000,
@@ -19,6 +20,7 @@ export const vehicles = [
   {
     brand: "Fiat",
     model: "Palio",
+    spec: "Palio v1",
     year: "2022",
     fuel: "Etanol",
     km: 12000,
@@ -36,6 +38,7 @@ export const vehicles = [
   {
     brand: "Fiat",
     model: "Strada",
+    spec: "Strada v1",
     year: "2023",
     fuel: "Flex",
     km: 8000,
@@ -53,6 +56,7 @@ export const vehicles = [
   {
     brand: "Fiat",
     model: "Toro",
+    spec: "Toro v1",
     year: "2022",
     fuel: "Diesel",
     km: 15000,
@@ -70,6 +74,7 @@ export const vehicles = [
   {
     brand: "Fiat",
     model: "500X",
+    spec: "500X v1",
     year: "2023",
     fuel: "Gasolina",
     km: 5000,
@@ -87,6 +92,7 @@ export const vehicles = [
   {
     brand: "Fiat",
     model: "Punto",
+    spec: "Punto v1",
     year: "2022",
     fuel: "Gasolina",
     km: 20000,
@@ -104,6 +110,7 @@ export const vehicles = [
   {
     brand: "Volkswagen",
     model: "Fusca",
+    spec: "Fusca v1",
     year: "1972",
     fuel: "Gasolina",
     km: 100000,
@@ -122,6 +129,7 @@ export const vehicles = [
   {
     brand: "Volkswagen",
     model: "Gol",
+    spec: "Gol v1",
     year: "2022",
     fuel: "Gasolina",
     km: 5000,
@@ -140,6 +148,7 @@ export const vehicles = [
   {
     brand: "Volkswagen",
     model: "Tiguan",
+    spec: "Tiguan v1",
     year: "2023",
     fuel: "Gasolina",
     km: 10000,
@@ -158,6 +167,7 @@ export const vehicles = [
   {
     brand: "Volkswagen",
     model: "Up!",
+    spec: "Up! v1",
     year: "2022",
     fuel: "Etanol",
     km: 8000,
@@ -176,6 +186,7 @@ export const vehicles = [
   {
     brand: "Volkswagen",
     model: "Golf",
+    spec: "Golf v1",
     year: "2023",
     fuel: "Gasolina",
     km: 15000,
@@ -193,6 +204,7 @@ export const vehicles = [
   {
     brand: "Ford",
     model: "Ka",
+    spec: "Ka v1",
     year: "2022",
     fuel: "Etanol",
     km: 10000,
@@ -210,6 +222,7 @@ export const vehicles = [
   {
     brand: "Ford",
     model: "EcoSport",
+    spec: "EcoSport v1",
     year: "2022",
     fuel: "Flex",
     km: 12000,
@@ -227,6 +240,7 @@ export const vehicles = [
   {
     brand: "Ford",
     model: "Ranger",
+    spec: "Ranger v1",
     year: "2023",
     fuel: "Diesel",
     km: 15000,
@@ -244,6 +258,7 @@ export const vehicles = [
   {
     brand: "Ford",
     model: "Mustang",
+    spec: "Mustang v1",
     year: "2022",
     fuel: "Gasolina",
     km: 5000,
@@ -261,6 +276,7 @@ export const vehicles = [
   {
     brand: "Ford",
     model: "Fusion",
+    spec: "Fusion v1",
     year: "2023",
     fuel: "Gasolina",
     km: 8000,
@@ -278,6 +294,7 @@ export const vehicles = [
   {
     brand: "Ford",
     model: "Edge",
+    spec: "Edge v1",
     year: "2022",
     fuel: "Gasolina",
     km: 20000,
@@ -295,6 +312,7 @@ export const vehicles = [
   {
     brand: "Toyota",
     model: "Corolla",
+    spec: "Corolla v1",
     year: "2022",
     fuel: "Gasolina",
     km: 10000,
@@ -312,6 +330,7 @@ export const vehicles = [
   {
     brand: "Toyota",
     model: "Hilux",
+    spec: "Hilux v1",
     year: "2023",
     fuel: "Diesel",
     km: 15000,
@@ -329,6 +348,7 @@ export const vehicles = [
   {
     brand: "Toyota",
     model: "RAV4",
+    spec: "RAV4 v1",
     year: "2022",
     fuel: "Gasolina",
     km: 5000,
@@ -346,6 +366,7 @@ export const vehicles = [
   {
     brand: "Toyota",
     model: "Yaris",
+    spec: "Yaris v1",
     year: "2023",
     fuel: "Etanol",
     km: 8000,
@@ -363,6 +384,7 @@ export const vehicles = [
   {
     brand: "Toyota",
     model: "Camry",
+    spec: "Camry v1",
     year: "2022",
     fuel: "Gasolina",
     km: 20000,
@@ -380,6 +402,7 @@ export const vehicles = [
   {
     brand: "Hyundai",
     model: "HB20",
+    spec: "HB20 v1",
     year: "2022",
     fuel: "Etanol",
     km: 10000,
@@ -397,6 +420,7 @@ export const vehicles = [
   {
     brand: "Hyundai",
     model: "Creta",
+    spec: "Creta v1",
     year: "2022",
     fuel: "Flex",
     km: 12000,
@@ -414,6 +438,7 @@ export const vehicles = [
   {
     brand: "Hyundai",
     model: "Tucson",
+    spec: "Tucson v1",
     year: "2023",
     fuel: "Gasolina",
     km: 8000,
@@ -431,6 +456,7 @@ export const vehicles = [
   {
     brand: "Hyundai",
     model: "Santa Fe",
+    spec: "Santa Fe v1",
     year: "2022",
     fuel: "Gasolina",
     km: 5000,
@@ -448,6 +474,7 @@ export const vehicles = [
   {
     brand: "Hyundai",
     model: "Elantra",
+    spec: "Elantra v1",
     year: "2023",
     fuel: "Gasolina",
     km: 8000,
@@ -465,6 +492,7 @@ export const vehicles = [
   {
     brand: "Volvo",
     model: "XC40",
+    spec: "XC40 v1",
     year: "2022",
     fuel: "Gasolina",
     km: 10000,
@@ -482,6 +510,7 @@ export const vehicles = [
   {
     brand: "Volvo",
     model: "XC60",
+    spec: "XC60 v1",
     year: "2022",
     fuel: "Diesel",
     km: 15000,
@@ -499,6 +528,7 @@ export const vehicles = [
   {
     brand: "Volvo",
     model: "S60",
+    spec: "S60 v1",
     year: "2023",
     fuel: "Gasolina",
     km: 8000,
@@ -516,6 +546,7 @@ export const vehicles = [
   {
     brand: "Volvo",
     model: "V90",
+    spec: "V90 v1",
     year: "2022",
     fuel: "Gasolina",
     km: 5000,
@@ -533,6 +564,7 @@ export const vehicles = [
   {
     brand: "Volvo",
     model: "XC90",
+    spec: "XC90 v2",
     year: "2023",
     fuel: "Gasolina",
     km: 8000,
@@ -550,6 +582,7 @@ export const vehicles = [
   {
     brand: "BMW",
     model: "Série 3",
+    spec: "Série 3 v1",
     year: "2022",
     fuel: "Gasolina",
     km: 10000,
@@ -567,6 +600,7 @@ export const vehicles = [
   {
     brand: "BMW",
     model: "X1",
+    spec: "X1 v1",
     year: "2022",
     fuel: "Diesel",
     km: 15000,
@@ -584,6 +618,7 @@ export const vehicles = [
   {
     brand: "BMW",
     model: "i3",
+    spec: "i3 v1",
     year: "2023",
     fuel: "Elétrico",
     km: 8000,
@@ -601,6 +636,7 @@ export const vehicles = [
   {
     brand: "BMW",
     model: "X5",
+    spec: "X5 v1",
     year: "2022",
     fuel: "Gasolina",
     km: 5000,
@@ -618,6 +654,7 @@ export const vehicles = [
   {
     brand: "BMW",
     model: "Série 7",
+    spec: "Série 7 v1",
     year: "2023",
     fuel: "Gasolina",
     km: 8000,

@@ -7,10 +7,11 @@ import { User } from "../../entities/user.entitie";
 import { vehicles } from "./veicleData";
 import { randomNumbers } from "../../utils/random";
 
-
-
 export class CarSeeder implements Seeder {
-  async run(dataSource: DataSource, factoryManager: SeederFactoryManager): Promise<any> {
+  async run(
+    dataSource: DataSource,
+    factoryManager: SeederFactoryManager
+  ): Promise<any> {
     const carRepository = dataSource.getRepository(Car);
     const userRepository = dataSource.getRepository(User);
 
@@ -24,6 +25,7 @@ export class CarSeeder implements Seeder {
         const car = new Car();
         car.brand = vehicle.brand;
         car.model = vehicle.model;
+        car.spec = vehicle.spec;
         car.year = vehicle.year;
         car.fuel = vehicle.fuel;
         car.km = vehicle.km;
