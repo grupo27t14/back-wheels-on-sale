@@ -3,10 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { Car } from "../../entities/car.entitie";
 import { Comment } from "../../entities/coment.entitie";
 import AppError from "../../errors/AppErrors";
-import {
-  commentSchemaResponse,
-  commentsSchemaResponse,
-} from "../../schemas/comment.schema";
+import { commentsSchemaRes } from "../../schemas/comment.schema";
 
 const listCommentsService = async (carId: string) => {
   const commentRepository = AppDataSource.getRepository(Comment);
@@ -21,10 +18,10 @@ const listCommentsService = async (carId: string) => {
     where: {
       car: { id: carId },
     },
-    relations: ["user"],
+    relations: ["user", "car"],
   });
 
-  return commentsSchemaResponse.parse(comments);
+  return commentsSchemaRes.parse(comments);
 };
 
 export { listCommentsService };
