@@ -47,10 +47,12 @@ const commentsSchema = commentSchemaResponse.omit({
 });
 
 const commentsSchemaResponse = z.array(commentsSchema);
+const commentsSchemaRes = z.array(commentSchemaResponse);
 
 export {
   commentSchema,
   commentSchemaRequest,
   commentSchemaResponse,
   commentsSchemaResponse,
+  commentsSchemaRes,
 };
