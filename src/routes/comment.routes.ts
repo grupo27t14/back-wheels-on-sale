@@ -11,6 +11,7 @@ import {
   ensureUuidIsValidMiddleware,
 } from "../middlewares";
 import { commentSchemaRequest } from "../schemas/comment.schema";
+import { ensureIsOwnerMiddlewareComment } from "../middlewares/ensureIsOwnerComment.middleware";
 
 const commentRoutes = Router();
 
@@ -26,6 +27,7 @@ commentRoutes.patch(
   "/:id",
   ensureUuidIsValidMiddleware,
   ensureAuthMiddleware,
+  ensureIsOwnerMiddlewareComment,
   ensureDataIsValidMiddleware(commentSchemaRequest),
   updateCommentController
 );
@@ -33,6 +35,7 @@ commentRoutes.delete(
   "/:id",
   ensureUuidIsValidMiddleware,
   ensureAuthMiddleware,
+  ensureIsOwnerMiddlewareComment,
   deleteCommentController
 );
 
