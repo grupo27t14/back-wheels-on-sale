@@ -13,7 +13,7 @@ const carSchema = z.object({
   price: z.number(),
   is_promo: z.boolean(),
   description: z.string(),
-  is_published: z.boolean(),
+  is_published: z.boolean().default(false),
 });
 
 const carSchemaRes = carSchema.extend({
@@ -40,7 +40,6 @@ const carSchemaRes = carSchema.extend({
 const carSchemaRequest = carSchema.omit({
   id: true,
   is_promo: true,
-  is_published: true,
 });
 
 const carSchemaUpdate = carSchemaRequest.partial();
