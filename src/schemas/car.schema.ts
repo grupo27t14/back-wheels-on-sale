@@ -24,6 +24,7 @@ const carSchemaRes = carSchema.extend({
     avatar_bg: z.string(),
     personalInformation: z
       .object({
+        phone: z.string().nullable().optional(),
         description: z.string().nullable().optional(),
       })
       .optional(),
