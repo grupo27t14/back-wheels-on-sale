@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppErrors";
 import { User } from "../../entities/user.entitie";
-import { carSchema, carSchemaRes } from "../../schemas/car.schema";
+import { carSchemaRes } from "../../schemas/car.schema";
 import { Car } from "../../entities/car.entitie";
 import { TCarRequest, TCarResponse } from "../../interfaces/car.interface";
 
