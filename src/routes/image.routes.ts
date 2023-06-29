@@ -15,11 +15,7 @@ import { upload } from "../utils/multerConfig";
 
 const imageRoutes = Router();
 
-imageRoutes.get(
-  "/:id",
-  ensureUuidIsValidMiddleware,
-  listImagesController
-);
+imageRoutes.get("/:id", ensureUuidIsValidMiddleware, listImagesController);
 
 imageRoutes.use(ensureAuthMiddleware);
 
@@ -33,7 +29,7 @@ imageRoutes.post(
 );
 
 imageRoutes.delete(
-  "/:imageId/car/:carId",
+  "/:imageId/car/:id",
   ensureIsOwnerMiddlewareCar,
   deleteImageController
 );
