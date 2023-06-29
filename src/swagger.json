@@ -58,6 +58,98 @@
         }
       }
     },
+    "/resetPassword": {
+      "post": {
+        "summary": "User Reset Password",
+        "description": "This route will reset users password",
+        "tags": ["ResetPassword"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestResetPassword"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "client1@mail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Invalid credentials"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/RequestResetPassword"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resetPassword/{token}": {
+      "patch": {
+        "summary": "Reset Password with Token",
+        "description": "This route will reset users password",
+        "tags": ["ResetPassword"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "User TOKEN",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordUpdate"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "password": "new1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Invalid credentials"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ResetPasswordUpdate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/user": {
       "post": {
         "summary": "Create User",
@@ -147,7 +239,7 @@
             "in": "header",
             "description": "Token do Portador (Bearer Token)",
             "required": true
-            }
+          }
         ],
         "responses": {
           "400": {
@@ -329,12 +421,13 @@
                   "value": {
                     "brand": "Toyota",
                     "model": "Corolla",
+                    "spec": "Altis Premium",
                     "year": "2022",
                     "fuel": "Gasolina",
-                    "km": "10.000",
+                    "km": 10.0,
                     "color": "Prata",
                     "fipe": "123456",
-                    "price": "80000",
+                    "price": 80000,
                     "description": "Carro em excelente estado"
                   }
                 }
@@ -455,13 +548,14 @@
                 "car": {
                   "value": {
                     "brand": "Volkswagen",
+                    "spec": "Se meu fusca falasse",
                     "model": "Fusca",
                     "year": "1973/1973",
                     "fuel": "Gasolina",
-                    "km": "9.000",
+                    "km": 9.0,
                     "color": "Azul",
                     "fipe": "33.372",
-                    "price": "30000",
+                    "price": 30000,
                     "description": "Carro em excelente estado"
                   }
                 }
@@ -527,7 +621,7 @@
         "description": "This route will add one image to a car",
         "tags": ["Image"],
         "security": [{ "bearerAuth": [] }],
-                "parameters": [
+        "parameters": [
           {
             "name": "id",
             "in": "path",
@@ -535,16 +629,16 @@
             "required": true
           }
         ],
+        "consumes": ["multipart/form-data"],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Image"
-              },
-              "examples": {
-                "user": {
-                  "value": {
-                    "url": "https://th.bing.com/th/id/R.fc11817b2c60f17167244b14fc90a625?rik=76pH8B4rAgxxzQ&pid=ImgRaw&r=0"
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               }
@@ -641,34 +735,6 @@
         }
       }
     },
-    "/comments": {
-      "get": {
-        "summary": "List All Comments",
-        "description": "This route will list all comments from a car",
-        "tags": ["Comment"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Car ID",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "appication/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Comment"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/comments/{id}": {
       "post": {
         "summary": "Create Comment",
@@ -713,6 +779,32 @@
             "description": "Created",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List All Veicle Comments",
+        "description": "This route will list all veicle comments",
+        "tags": ["Comment"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "appication/json": {
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/Comment"
@@ -833,6 +925,22 @@
           }
         }
       },
+      "ResetPasswordUpdate": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestResetPassword": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      },
       "User": {
         "type": "object",
         "properties": {
@@ -845,11 +953,17 @@
           "password": {
             "type": "string"
           },
+          "reset_password": {
+            "type": "string"
+          },
           "is_admin": {
             "type": "boolean"
           },
           "is_seller": {
             "type": "boolean"
+          },
+          "avatar_bg": {
+            "type": "string"
           },
           "personalInformation": {
             "cpf": {
@@ -896,6 +1010,9 @@
           "model": {
             "type": "string"
           },
+          "spec": {
+            "type": "string"
+          },
           "year": {
             "type": "string"
           },
@@ -903,7 +1020,7 @@
             "type": "string"
           },
           "km": {
-            "type": "string"
+            "type": "number"
           },
           "color": {
             "type": "string"
@@ -912,7 +1029,7 @@
             "type": "string"
           },
           "price": {
-            "type": "string"
+            "type": "number"
           },
           "description": {
             "type": "string"
