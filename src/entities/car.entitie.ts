@@ -47,7 +47,7 @@ export class Car {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ default: true })
   is_published: Boolean;
 
   @CreateDateColumn({ type: "timestamp" })
