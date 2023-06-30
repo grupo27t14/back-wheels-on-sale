@@ -25,15 +25,15 @@ export class CarSeeder implements Seeder {
         const car = new Car();
         car.brand = vehicle.brand;
         car.model = vehicle.model;
-        car.spec = vehicle.spec;
-        car.year = vehicle.year;
+        car.spec = Array.isArray(vehicle.spec) ? vehicle.spec[randomNumbers(0, vehicle.spec.length)] : vehicle.spec;
+        car.year = Array.isArray(vehicle.year) ? vehicle.year[randomNumbers(0, vehicle.year.length)] : vehicle.year;
         car.fuel = vehicle.fuel;
-        car.km = vehicle.km;
+        car.km = Array.isArray(vehicle.km) ? vehicle.km[randomNumbers(0, vehicle.km.length)] : vehicle.km;
         car.color = vehicle.color;
         car.fipe = vehicle.fipe;
-        car.price = vehicle.price;
+        car.price = Array.isArray(vehicle.price) ? vehicle.price[randomNumbers(0, vehicle.price.length)] : vehicle.price;
         car.is_promo = vehicle.is_promo;
-        car.description = vehicle.description;
+        car.description = Array.isArray(vehicle.description) ? vehicle.description[randomNumbers(0, vehicle.description.length)] : vehicle.description;
         car.created_at = new Date();
 
         car.user = user; // Associar o carro ao usuário atual
