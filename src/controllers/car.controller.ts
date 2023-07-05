@@ -23,6 +23,7 @@ const listCarsController = async (req: Request, res: Response) => {
       model: req.query.model as string | null,
       color: req.query.color as string | null,
       year: req.query.year as string | null,
+      is_published: req.query.is_published as string | null,
     },
     sort: req.query.sort as string[] | null,
     minmax: {

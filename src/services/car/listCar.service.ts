@@ -12,6 +12,7 @@ interface iFilter {
     model: string | null;
     color: string | null;
     year: string | null;
+    is_published: string | boolean | null;
   };
   sort?: string[] | null;
   minmax: {
@@ -21,6 +22,11 @@ interface iFilter {
 }
 
 const getOrderAndSort = (filter: iFilter) => {
+  if (filter.where.is_published) {
+    filter.where.is_published =
+      filter.where.is_published === "false" ? false : true;
+  }
+
   let order = {};
   if (filter.sort) {
     const sorter = typeof filter.sort == "string" ? [filter.sort] : filter.sort;

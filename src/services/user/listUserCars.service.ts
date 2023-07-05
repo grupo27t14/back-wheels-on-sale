@@ -19,7 +19,7 @@ const listUserCarsService = async (
 
   const user = (await userRepository.findOne({
     where: { id: userId },
-    relations: {personalInformation: true}
+    relations: { personalInformation: true },
   })) as TUserRes;
 
   if (!user) {
@@ -40,9 +40,9 @@ const listUserCarsService = async (
 
   const parsedCars = carsSchemaResponse.parse(cars);
 
-  const rota = `user/${userId}/cars`;
+  const route = `/user/${userId}/cars`;
 
-    return setPagination(totalCount, limit, page, baseUrl + rota, parsedCars);
+  return setPagination(totalCount, limit, page, baseUrl + route, parsedCars);
 };
 
 export default listUserCarsService;
