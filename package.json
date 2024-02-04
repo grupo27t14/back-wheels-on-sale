@@ -1,14 +1,14 @@
 {
   "name": "api-wheels-on-sale",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "build": "tsc",
     "start": "node dist/server.js",
-    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/data-source.ts"
+    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/server.js seed -d ./src/data-source.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
