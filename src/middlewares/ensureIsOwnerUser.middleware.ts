@@ -1,4 +1,3 @@
-
 import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/user.entitie";
